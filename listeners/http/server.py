@@ -30,4 +30,4 @@ class Listener(object):
 		else:
 			return "Failed: Previous command hasn't been completed"
 	def run(self,args):
-		self.app.run(host=args['addr'].port=int(args['port']))
+		self.app.run(host=args['addr'],port=int(args['port']))
