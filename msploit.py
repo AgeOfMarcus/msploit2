@@ -67,6 +67,7 @@ man = {
 	'exit':'Exits the program',
 	'uselistener':"Use a listener. Usage: 'uselistener [listener] {nickname}'",
 	'show':"Displays something. Usage: 'show [thing]'. Valid arguments: options,listeners",
+	'python':'Drop into a python shell',
 }
 def print_help():
 	print(colored("Key","cyan") + ": [] = required argument, {} = optional argument.")
@@ -112,6 +113,16 @@ class CmdHandler(object):
 						print_options(opt)
 			except:
 				print(error("Needed argument: [thing]"))
+		elif base == "set":
+			try:
+				var = cmd.split(" ")[1]
+				val = cmd.split(" ")[2]
+				cfg.listeners[cfg.currentListener].options[var] = val
+				print("Set %s to %s" % (var,val))
+			except:
+				print("Invalid value or no listener selected")
+		elif base == "python":
+			code.interact(local=dict(globals(), **locals()))
 		else:
 			print(error("Invalid command"))
 
